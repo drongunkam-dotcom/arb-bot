@@ -5,12 +5,21 @@ use anyhow::Result;
 use rust_decimal::Decimal;
 use std::sync::Arc;
 use std::time::Duration;
-use log::{info, warn, error};
+use log::{info, warn};
 
 use crate::config::Config;
 use crate::wallet::Wallet;
 use crate::dex::{DexClient, DexQuote};
 use crate::monitor::Monitor;
+
+/// Структура для описания арбитражной возможности
+#[derive(Debug, Clone)]
+pub struct ArbitrageOpportunity {
+    pub pair: String,
+    pub buy_dex: String,
+    pub sell_dex: String,
+    pub profit_percent: f64,
+}
 
 pub struct ArbitrageEngine {
     config: Config,
@@ -90,14 +99,6 @@ impl ArbitrageEngine {
         }
     }
     
-    /// Структура для описания арбитражной возможности
-    pub struct ArbitrageOpportunity {
-        pub pair: String,
-        pub buy_dex: String,
-        pub sell_dex: String,
-        pub profit_percent: f64,
-    }
-    
     /// Поиск арбитражных возможностей на основе котировок
     fn find_arbitrage_opportunities(
         &self,
@@ -106,12 +107,11 @@ impl ArbitrageEngine {
         let mut result = Vec::new();
         
         // Простейший алгоритм:
-        // Для каждой пары токенов находим:
-        // - DEX, где можно купить дешевле всего
-        // - DEX, где можно продать дороже всего
-        // И считаем потенциальный профит.
+        // Для каждой пары токенов:
+        //  - ищем, где купить дешевле всего
+        //  - где продать дороже всего
+        //  - считаем профит.
         
-        // Собираем по парам все котировки
         use std::collections::HashMap;
         let mut by_pair: HashMap<String, Vec<&DexQuote>> = HashMap::new();
         
@@ -146,8 +146,9 @@ impl ArbitrageEngine {
                     continue;
                 }
                 
-                let profit = (max_q.price - min_q.price) / min_q.price * Decimal::new(100, 0);
-                let profit_f64: f64 = profit.try_into().unwrap_or(0.0);
+                let hundred = Decimal::new(100, 0);
+                let profit = (max_q.price - min_q.price) / min_q.price * hundred;
+                let profit_f64: f64 = profit.to_string().parse().unwrap_or(0.0);
                 
                 if profit_f64 > 0.0 {
                     result.push(ArbitrageOpportunity {

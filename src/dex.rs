@@ -1,89 +1,69 @@
-// wallet.rs — управление кошельком Solana
-// Назначение: загрузка ключей, подписание транзакций, проверка баланса
+// dex.rs — интеграция с DEX'ами на Solana
+// Назначение: получение котировок, расчёт маршрутов, подготовка транзакций
 
-use anyhow::{Result, Context};
-use solana_sdk::{
-    signature::{Keypair, Signer},
-    pubkey::Pubkey,
-};
-use solana_client::rpc_client::RpcClient;
-use std::fs;
-use std::sync::Arc;
+use anyhow::Result;
+use rust_decimal::Decimal;
+use serde::Deserialize;
+use std::collections::HashMap;
 
 use crate::config::Config;
 
-pub struct Wallet {
-    keypair: Keypair,
-    rpc_client: Arc<RpcClient>,
+#[derive(Debug, Clone, Deserialize)]
+pub struct DexQuote {
+    pub dex_name: String,
+    pub pair: String,
+    pub input_amount: Decimal,
+    pub output_amount: Decimal,
+    pub price: Decimal,
+    pub fee: Decimal,
 }
 
-impl Wallet {
-    /// Создание нового экземпляра кошелька
-    pub fn new(config: &Config) -> Result<Self> {
-        // Загрузка keypair из файла
-        let keypair = Self::load_keypair(&config.wallet.keypair_path)?;
-        
-        // Создание RPC клиента
-        let rpc_client = Arc::new(RpcClient::new(config.network.rpc_url.clone()));
-        
-        Ok(Self {
-            keypair,
-            rpc_client,
-        })
+#[derive(Debug, Clone)]
+pub struct DexClient {
+    enabled_dexes: Vec<String>,
+    trading_pairs: Vec<String>,
+}
+
+impl DexClient {
+    pub fn new(config: &Config) -> Self {
+        Self {
+            enabled_dexes: config.dex.enabled_dexes.clone(),
+            trading_pairs: config.dex.trading_pairs.clone(),
+        }
     }
     
-    /// Загрузка keypair из JSON файла
-    fn load_keypair(path: &str) -> Result<Keypair> {
-        // Проверка прав доступа к файлу (должен быть 400 или 600)
-        let metadata = fs::metadata(path)
-            .context(format!("Не удалось прочитать файл ключа: {}", path))?;
+    /// Получение котировок со всех включённых DEX по всем парам
+    pub async fn fetch_all_quotes(&self) -> Result<HashMap<String, Vec<DexQuote>>> {
+        // ⚠️ Заглушка: реальная интеграция с DEX будет зависеть от конкретных протоколов (Raydium, Orca и т.д.)
+        // Здесь мы оставляем структуру, чтобы можно было потом подключить реальные SDK/API.
         
-        #[cfg(unix)]
-        {
-            use std::os::unix::fs::PermissionsExt;
-            let mode = metadata.permissions().mode();
-            if mode & 0o077 != 0 {
-                log::warn!(
-                    "⚠️  Файл ключа {} имеет небезопасные права доступа! Установите: chmod 400 {}",
-                    path,
-                    path
-                );
+        let mut result: HashMap<String, Vec<DexQuote>> = HashMap::new();
+        
+        for dex in &self.enabled_dexes {
+            let mut quotes_for_dex = Vec::new();
+            
+            for pair in &self.trading_pairs {
+                // В реальной реализации здесь будет RPC/HTTP запрос к DEX
+                // Сейчас подставляем фиктивные значения для структуры
+                let input_amount = Decimal::new(1000, 0); // 1000 единиц базового токена
+                let price = Decimal::new(100, 2); // 1.00 условная цена
+                let fee = Decimal::new(3, 2); // 0.03
+                let one = Decimal::new(1, 0);
+                let output_amount = input_amount * price * (one - fee);
+                
+                quotes_for_dex.push(DexQuote {
+                    dex_name: dex.clone(),
+                    pair: pair.clone(),
+                    input_amount,
+                    output_amount,
+                    price,
+                    fee,
+                });
             }
+            
+            result.insert(dex.clone(), quotes_for_dex);
         }
         
-        // Чтение и парсинг keypair
-        let keypair_bytes = fs::read_to_string(path)
-            .context("Не удалось прочитать содержимое файла ключа")?;
-        
-        let keypair_vec: Vec<u8> = serde_json::from_str(&keypair_bytes)
-            .context("Некорректный формат файла ключа (ожидается JSON массив)")?;
-        
-        Keypair::from_bytes(&keypair_vec).context("Не удалось создать keypair из байтов")
-    }
-    
-    /// Получение публичного ключа
-    pub fn public_key(&self) -> Pubkey {
-        self.keypair.pubkey()
-    }
-    
-    /// Получение баланса в SOL
-    pub async fn get_balance(&self) -> Result<f64> {
-        let lamports = self
-            .rpc_client
-            .get_balance(&self.keypair.pubkey())
-            .context("Не удалось получить баланс")?;
-        
-        // Конвертация lamports в SOL (1 SOL = 1_000_000_000 lamports)
-        Ok(lamports as f64 / 1_000_000_000.0)
-    }
-    
-    /// Получение ссылки на keypair для подписания транзакций
-    pub fn keypair(&self) -> &Keypair {
-        &self.keypair
-    }
-    
-    /// Получение ссылки на RPC клиент
-    pub fn rpc_client(&self) -> &RpcClient {
-        &self.rpc_client
+        Ok(result)
     }
 }
