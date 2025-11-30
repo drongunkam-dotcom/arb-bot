@@ -1,0 +1,22 @@
+[Unit]
+Description=Arb Bot - Arbitrage Trading Bot
+After=network.target
+
+[Service]
+Type=simple
+User=arb-bot
+WorkingDirectory=/opt/arb-bot
+ExecStart=/opt/arb-bot/target/release/arb-bot
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
+
+
+
+
+
+

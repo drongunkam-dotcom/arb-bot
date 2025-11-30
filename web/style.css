@@ -1,0 +1,87 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: #0a0e27;
+    color: #e0e0e0;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    color: #4CAF50;
+    font-size: 2.5em;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background: #1a1f3a;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #2a2f4a;
+}
+
+.stat-card h3 {
+    color: #888;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+.stat-card p {
+    color: #4CAF50;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.opportunities, .logs {
+    background: #1a1f3a;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #2a2f4a;
+    margin-bottom: 20px;
+}
+
+.opportunities h2, .logs h2 {
+    color: #4CAF50;
+    margin-bottom: 15px;
+}
+
+#opportunities-list, #logs-container {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.log-entry {
+    padding: 10px;
+    margin-bottom: 5px;
+    background: #0f1429;
+    border-left: 3px solid #4CAF50;
+    border-radius: 4px;
+}
+
+
+
+
+
+
+

@@ -1,0 +1,31 @@
+# Rust
+/target/
+Cargo.lock
+**/*.rs.bk
+
+# Секреты и конфиги
+.env
+config.toml
+keys/*.json
+
+# Логи
+logs/*.log
+*.log
+
+# Бэкапы
+backups/*.tar.gz.gpg
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node (для веб-интерфейса в будущем)
+node_modules/
+package-lock.json

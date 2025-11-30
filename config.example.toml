@@ -1,0 +1,27 @@
+[network]
+rpc_url = "https://api.mainnet-beta.solana.com"
+ws_url = "wss://api.mainnet-beta.solana.com"
+commitment = "confirmed"
+
+[wallet]
+keypair_path = "/home/botuser/.config/solana/id.json"
+
+[arbitrage]
+min_profit_percent = 0.5
+max_trade_amount_sol = 1.0
+slippage_tolerance = 0.5
+transaction_timeout_sec = 30
+
+[dex]
+enabled_dexes = ["Raydium", "Orca"]
+trading_pairs = ["SOL/USDC", "SOL/USDT"]
+
+[monitoring]
+check_interval_ms = 5000
+log_level = "info"
+log_file = "/var/log/arb-bot/arb-bot.log"
+
+[safety]
+simulation_mode = true
+max_consecutive_failures = 5
+min_balance_sol = 0.5
