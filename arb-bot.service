@@ -1,0 +1,26 @@
+[Unit]
+Description=Arbitrage Bot for Solana
+After=network.target
+
+[Service]
+Type=simple
+User=%i
+WorkingDirectory=/opt/arb-bot
+Environment="RUST_LOG=info"
+EnvironmentFile=/opt/arb-bot/.env
+ExecStart=/opt/arb-bot/target/release/arb-bot
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+# Безопасность
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/arb-bot /var/log/arb-bot
+
+[Install]
+WantedBy=multi-user.target
+

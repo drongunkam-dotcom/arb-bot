@@ -1,0 +1,27 @@
+# Секреты и конфигурация
+.env
+config.toml
+keys/
+*.key
+*.json
+
+# Rust
+target/
+Cargo.lock
+
+# Логи
+*.log
+logs/
+/var/log/arb-bot/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+

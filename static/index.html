@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solana Arbitrage Bot | Cyber Edition</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-container">
+        <div class="grid-pattern"></div>
+        <div class="grid-pattern-2"></div>
+        <div class="particles"></div>
+    </div>
+
+    <header class="main-header">
+        <nav class="navbar">
+            <div class="logo-container">
+                <img src="https://placehold.co/600x400/6a5af9/d64550?text=SOLANA" alt="Solana Bot Logo" class="logo">
+                <h1>SOLANA ARBITRAGE BOT</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#dashboard">Dashboard</a></li>
+                <li><a href="#trading">Trading</a></li>
+                <li><a href="#analytics">Analytics</a></li>
+                <li><a href="#settings">Settings</a></li>
+                <li><a href="#connect">Connect Wallet</a></li>
+                <li class="theme-selector">
+                    <select id="theme-select">
+                        <option value="dark">Dark Mode</option>
+                        <option value="light">Light Mode</option>
+                        <option value="system">System Default</option>
+                    </select>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <section class="hero-section">
+            <div class="hero-content">
+                <h2>TRADE THE MARKET WITH SOLANA ARBITRAGE</h2>
+                <p>Deploy your cyber-themed Solana arbitrage bot to exploit price differences across DEXs.</p>
+                <button class="cta-button">DEPLOY BOT NOW</button>
+            </div>
+            <div class="hero-image">
+                <img src="https://placehold.co/600x400/0d0d0d/00f0ff?text=CRYPTO+TRADING" alt="Crypto Trading">
+            </div>
+        </section>
+
+        <section class="features-section">
+            <h2>FEATURES</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <img src="https://placehold.co/150x150/1a1a1a/00f0ff?text=FAST" alt="Lightning Speed">
+                    <h3>Lightning Fast</h3>
+                    <p>Execute trades in milliseconds to capitalize on price differences</p>
+                </div>
+                <div class="feature-card">
+                    <img src="https://placehold.co/150x150/1a1a1a/d64550?text=SECURE" alt="Secure">
+                    <h3>Military-Grade Security</h3>
+                    <p>Enterprise-grade security to protect your investments</p>
+                </div>
+                <div class="feature-card">
+                    <img src="https://placehold.co/150x150/1a1a1a/00ff9d?text=DATA" alt="Analytics">
+                    <h3>Advanced Analytics</h3>
+                    <p>Real-time data to track your bot's performance</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="dashboard-section">
+            <h2>BOT DASHBOARD</h2>
+            <div class="dashboard-container">
+                <div class="stats-panel">
+                    <h3>STATISTICS</h3>
+                    <div class="stat-item">
+                        <span>Total Profit:</span>
+                        <span class="profit">+42.7 SOL</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>Active Trades:</span>
+                        <span class="active">24</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>Success Rate:</span>
+                        <span class="success">98.5%</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>Active DEXs:</span>
+                        <span class="dex-count">5</span>
+                    </div>
+                </div>
+                
+                <div class="trading-panel">
+                    <h3>LIVE TRADES</h3>
+                    <div class="trade-log">
+                        <div class="trade-item">
+                            <span class="trade-pair">SOL/USDC</span>
+                            <span class="trade-dex">Raydium</span>
+                            <span class="trade-profit">+0.003 SOL</span>
+                            <span class="trade-status">SUCCESS</span>
+                        </div>
+                        <div class="trade-item">
+                            <span class="trade-pair">SOL/USDT</span>
+                            <span class="trade-dex">Orca</span>
+                            <span class="trade-profit">+0.002 SOL</span>
+                            <span class="trade-status">SUCCESS</span>
+                        </div>
+                        <div class="trade-item">
+                            <span class="trade-pair">ETH/SOL</span>
+                            <span class="trade-dex">Jupiter</span>
+                            <span class="trade-profit">+0.005 SOL</span>
+                            <span class="trade-status">SUCCESS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="config-section">
+            <h2>CONFIGURATION</h2>
+            <div class="config-container">
+                <div class="config-panel">
+                    <h3>TRADE SETTINGS</h3>
+                    <div class="config-row">
+                        <label for="min-profit">Minimum Profit (%)</label>
+                        <input type="number" id="min-profit" value="0.5" min="0.1" max="10" step="0.1">
+                    </div>
+                    <div class="config-row">
+                        <label for="trade-amount">Trade Amount (SOL)</label>
+                        <input type="number" id="trade-amount" value="1.0" min="0.1" max="100" step="0.1">
+                    </div>
+                    <div class="config-row">
+                        <label for="slippage">Slippage Tolerance (%)</label>
+                        <input type="number" id="slippage" value="1.0" min="0.1" max="5" step="0.1">
+                    </div>
+                    <div class="config-row">
+                        <label for="check-interval">Check Interval (ms)</label>
+                        <input type="number" id="check-interval" value="1000" min="100" max="10000" step="100">
+                    </div>
+                </div>
+                
+                <div class="config-panel">
+                    <h3>ACTIVE DEXs</h3>
+                    <div class="dex-options">
+                        <label class="checkbox-container">
+                            <input type="checkbox" checked>
+                            <span class="checkmark"></span>
+                            Raydium
+                        </label>
+                        <label class="checkbox-container">
+                            <input type="checkbox" checked>
+                            <span class="checkmark"></span>
+                            Orca
+                        </label>
+                        <label class="checkbox-container">
+                            <input type="checkbox" checked>
+                            <span class="checkmark"></span>
+                            Serum
+                        </label>
+                        <label class="checkbox-container">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                            Jupiter
+                        </label>
+                        <label class="checkbox-container">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                            Saber
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="dashboard" class="dashboard-section">
+            <h2>BOT DASHBOARD</h2>
+            <div class="dashboard-container">
+                <div class="stats-panel">
+                    <h3>STATISTICS</h3>
+                    <div class="stat-item">
+                        <span>Total Profit:</span>
+                        <span class="profit">+42.7 SOL</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>Active Trades:</span>
+                        <span class="active">24</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>Success Rate:</span>
+                        <span class="success">98.5%</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>Active DEXs:</span>
+                        <span class="dex-count">5</span>
+                    </div>
+                </div>
+
+                <div class="trading-panel">
+                    <h3>LIVE TRADES</h3>
+                    <div class="trade-log">
+                        <div class="trade-item">
+                            <span class="trade-pair">SOL/USDC</span>
+                            <span class="trade-dex">Raydium</span>
+                            <span class="trade-profit">+0.003 SOL</span>
+                            <span class="trade-status">SUCCESS</span>
+                        </div>
+                        <div class="trade-item">
+                            <span class="trade-pair">SOL/USDT</span>
+                            <span class="trade-dex">Orca</span>
+                            <span class="trade-profit">+0.002 SOL</span>
+                            <span class="trade-status">SUCCESS</span>
+                        </div>
+                        <div class="trade-item">
+                            <span class="trade-pair">ETH/SOL</span>
+                            <span class="trade-dex">Jupiter</span>
+                            <span class="trade-profit">+0.005 SOL</span>
+                            <span class="trade-status">SUCCESS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="analytics" class="analytics-section">
+            <h2>ANALYTICS</h2>
+            <div class="analytics-container">
+                <div class="chart-panel">
+                    <h3>Profit Trend</h3>
+                    <div class="chart-placeholder">
+                        <img src="https://placehold.co/600x300/1a1a1a/00f0ff?text=PROFIT+CHART" alt="Profit Trend Chart" style="width:100%; height:100%;">
+                    </div>
+                </div>
+
+                <div class="chart-panel">
+                    <h3>Performance Metrics</h3>
+                    <div class="chart-placeholder">
+                        <img src="https://placehold.co/600x300/1a1a1a/d64550?text=PERFORMANCE+METRICS" alt="Performance Metrics" style="width:100%; height:100%;">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="trading" class="trading-section">
+            <h2>TRADING</h2>
+            <div class="trading-container">
+                <div class="trading-options">
+                    <h3>Trading Pairs</h3>
+                    <div class="pair-grid">
+                        <div class="pair-item">
+                            <span class="pair-name">SOL/USDC</span>
+                            <span class="pair-profit">+0.52%</span>
+                        </div>
+                        <div class="pair-item">
+                            <span class="pair-name">SOL/USDT</span>
+                            <span class="pair-profit">+0.31%</span>
+                        </div>
+                        <div class="pair-item">
+                            <span class="pair-name">ETH/SOL</span>
+                            <span class="pair-profit">+0.78%</span>
+                        </div>
+                        <div class="pair-item">
+                            <span class="pair-name">RAY/SOL</span>
+                            <span class="pair-profit">+0.25%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="trading-controls">
+                    <h3>Trading Controls</h3>
+                    <button class="trade-button start-trade">Start Trading</button>
+                    <button class="trade-button stop-trade">Stop Trading</button>
+                    <button class="trade-button emergency-stop">Emergency Stop</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="settings" class="config-section">
+            <h2>CONFIGURATION</h2>
+            <div class="config-container">
+                <div class="config-panel">
+                    <h3>TRADE SETTINGS</h3>
+                    <div class="config-row">
+                        <label for="min-profit">Minimum Profit (%)</label>
+                        <input type="number" id="min-profit" value="0.5" min="0.1" max="10" step="0.1">
+                    </div>
+                    <div class="config-row">
+                        <label for="trade-amount">Trade Amount (SOL)</label>
+                        <input type="number" id="trade-amount" value="1.0" min="0.1" max="100" step="0.1">
+                    </div>
+                    <div class="config-row">
+                        <label for="slippage">Slippage Tolerance (%)</label>
+                        <input type="number" id="slippage" value="1.0" min="0.1" max="5" step="0.1">
+                    </div>
+                    <div class="config-row">
+                        <label for="check-interval">Check Interval (ms)</label>
+                        <input type="number" id="check-interval" value="1000" min="100" max="10000" step="100">
+                    </div>
+                </div>
+
+                <div class="config-panel">
+                    <h3>ACTIVE DEXs</h3>
+                    <div class="dex-options">
+                        <label class="checkbox-container">
+                            <input type="checkbox" checked>
+                            <span class="checkmark"></span>
+                            Raydium
+                        </label>
+                        <label class="checkbox-container">
+                            <input type="checkbox" checked>
+                            <span class="checkmark"></span>
+                            Orca
+                        </label>
+                        <label class="checkbox-container">
+                            <input type="checkbox" checked>
+                            <span class="checkmark"></span>
+                            Serum
+                        </label>
+                        <label class="checkbox-container">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                            Jupiter
+                        </label>
+                        <label class="checkbox-container">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                            Saber
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <p>Solana Arbitrage Bot &copy; 2025 | Cyber Edition</p>
+        <div class="social-links">
+            <a href="#">Twitter</a>
+            <a href="#">Discord</a>
+            <a href="#">Telegram</a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

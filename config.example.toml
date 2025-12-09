@@ -1,0 +1,68 @@
+# config.example.toml — шаблон конфигурации арбитражного бота
+# Скопируйте в config.toml и настройте под свои нужды
+# Команда: cp config.example.toml config.toml && chmod 600 config.toml
+
+[network]
+# RPC endpoint Solana (mainnet-beta, devnet, testnet)
+# Рекомендация: используйте платный RPC (Alchemy, QuickNode) для продакшн
+rpc_url = "https://api.mainnet-beta.solana.com"
+# WebSocket для подписки на обновления
+ws_url = "wss://api.mainnet-beta.solana.com"
+# Commitment level: processed, confirmed, finalized
+# processed — быстрее, но менее надёжно; finalized — медленнее, но безопаснее
+commitment = "confirmed"
+
+[wallet]
+# Путь к файлу приватного ключа (JSON формат Solana CLI)
+# ВАЖНО: файл должен иметь права 400 (только чтение владельцем)
+keypair_path = "/opt/arb-bot/keys/wallet.json"
+
+[arbitrage]
+# Минимальная прибыль в процентах для выполнения сделки
+# Пример: 0.5 = 0.5% прибыль после вычета комиссий
+min_profit_percent = 0.5
+# Максимальная сумма для одной сделки (в SOL)
+# Риск: большие суммы увеличивают потенциальную прибыль, но и убытки
+max_trade_amount_sol = 1.0
+# Slippage tolerance (проскальзывание) в процентах
+# Пример: 1.0 = допустимо отклонение цены до 1%
+slippage_tolerance = 1.0
+# Таймаут транзакции в секундах
+transaction_timeout_sec = 30
+
+[dex]
+# Список DEX для мониторинга (поддерживаются: raydium, orca, serum)
+# Больше DEX = больше возможностей, но выше нагрузка
+enabled_dexes = ["raydium", "orca"]
+# Список торговых пар для мониторинга
+# Формат: "BASE/QUOTE" (например, "SOL/USDC")
+trading_pairs = ["SOL/USDC", "SOL/USDT"]
+
+[monitoring]
+# Интервал проверки арбитражных возможностей (миллисекунды)
+# Меньше = быстрее реакция, но выше нагрузка на RPC
+check_interval_ms = 1000
+# Уровень логирования: trace, debug, info, warn, error
+log_level = "info"
+# Путь к файлу логов
+log_file = "/var/log/arb-bot/arb-bot.log"
+
+[safety]
+# Режим симуляции (true = не выполнять реальные транзакции)
+# ВАЖНО: всегда тестируйте в режиме симуляции перед продакшн
+simulation_mode = true
+# Максимальное количество неудачных транзакций подряд перед остановкой
+max_consecutive_failures = 5
+# Минимальный баланс SOL для продолжения работы (резерв на комиссии)
+min_balance_sol = 0.1
+
+[web]
+# Включить веб-интерфейс
+enabled = true
+# Порт для HTTP сервера
+port = 8080
+# Адрес для привязки (0.0.0.0 для всех интерфейсов, 127.0.0.1 для локального)
+bind_address = "127.0.0.1"
+# Путь к статическим файлам (для frontend)
+static_dir = "/opt/arb-bot/static"
+

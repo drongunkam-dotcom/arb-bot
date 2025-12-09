@@ -1,0 +1,14 @@
+/var/log/arb-bot/*.log {
+    daily
+    rotate 7
+    compress
+    delaycompress
+    missingok
+    notifempty
+    create 0640 %i %i
+    sharedscripts
+    postrotate
+        systemctl reload arb-bot.service > /dev/null 2>&1 || true
+    endscript
+}
+
